@@ -1,0 +1,52 @@
+# ============================================
+# tcm-ai-learning-agent 依赖列表
+# 核心驱动：iFlytek 星火大模型 (Spark LLM)
+# 多智能体框架：CrewAI
+# ============================================
+
+# ---- Web 框架 ----
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+sse-starlette>=2.0.0          # SSE 流式输出
+
+# ---- 讯飞星火大模型 SDK ----
+spark-ai-python==0.4.5     # ⚠️ 核心：讯飞星火官方 SDK
+#xfyun-python-sdk>=0.2.0       # 讯飞开放平台辅助
+
+# ---- LangChain 生态（CrewAI 底层依赖 + RAG 工具链）----
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-core>=0.3.0
+
+# ---- CrewAI 多智能体框架 ----
+crewai>=0.80.0
+crewai-tools>=0.14.0
+
+# ---- 向量数据库 & 嵌入 ----
+chromadb>=0.5.0               # 向量存储（轻量本地部署）
+faiss-cpu>=1.8.0               # 备选向量检索（Facebook AI）
+
+# ---- 知识图谱 ----
+networkx>=3.3                  # 图结构处理（中医知识图谱三元组）
+pyvis>=0.3.2                   # 可视化（可选）
+
+# ---- 文档加载 & 处理 ----
+pypdf>=4.0.0                  # PDF 解析
+markdown>=3.7                  # Markdown 解析
+unstructured>=0.15.0           # 通用文档加载
+
+# ---- 数据 & 校验 ----
+pydantic>=2.9.0
+pydantic-settings>=2.5.0       # Settings 管理
+pyyaml>=6.0                    # config.yaml 读取
+
+# ---- 工具 ----
+python-dotenv>=1.0.0           # .env 加载
+httpx>=0.27.0                  # 异步HTTP客户端
+tenacity>=8.5.0                # 重试机制
+loguru>=0.7.0                  # 日志
+starlette>=0.40.0              # 中间件基础（AuthMiddleware 等）
+
+# ---- 测试 ----
+pytest>=8.3.0
+pytest-asyncio>=0.24.0

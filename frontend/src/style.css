@@ -1,0 +1,9 @@
+/* Vite 默认模板样式已清空，使用 src/styles/main.css */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}

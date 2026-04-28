@@ -1,0 +1,212 @@
+# ============================================
+# tcm-ai-learning-agent 全局配置
+# 赛题：第十五届中国软件杯 A3 - 基于大模型的个性化资源生成与学习多智能体系统
+# 课程：高等教育《中医基础理论》
+# 核心LLM：iFlytek 星火大模型 (Spark)
+# ============================================
+
+# ---- 课程设置 ----
+course:
+  name: "中医基础理论"
+  level: "高等教育"  # 本科/研究生
+  description: "系统讲授中医学的基础理论、哲学基础、藏象学说、气血津液、经络、病因病机等核心内容"
+  # 教材章节大纲（用于学习路径规划 & RAG 分块）
+  syllabus:
+    - id: ch01
+      title: "中医学的哲学基础"
+      keywords: ["阴阳", "五行", "精气学说", "天人合一"]
+    - id: ch02
+      title: "藏象学说"
+      keywords: ["五脏", "六腑", "奇恒之腑", "心", "肝", "脾", "肺", "肾"]
+    - id: ch03
+      title: "气血津液"
+      keywords: ["气", "血", "津液", "气血关系"]
+    - id: ch04
+      title: "经络学说"
+      keywords: ["十二经脉", "奇经八脉", "络脉", "循行路线"]
+    - id: ch05
+      title: "病因"
+      keywords: ["六淫", "疠气", "七情内伤", "饮食失宜", "劳逸失度"]
+    - id: ch06
+      title: "病机"
+      keywords: ["邪正盛衰", "阴阳失调", "气血津液失常"]
+    - id: ch07
+      title: "防治原则"
+      keywords: ["治未病", "正治反治", "治标治本", "调整阴阳"]
+
+# ---- 学习画像 6 维度定义 ----
+profile_dimensions:
+  - id: knowledge_level
+    name: "知识水平"
+    description: "学习者当前中医理论基础掌握程度"
+    levels: ["零基础", "初步了解", "基本掌握", "熟练掌握", "精通"]
+    assessment_prompt: "通过对话评估学习者对中医基础理论的掌握程度"
+
+  - id: learning_style
+    name: "学习风格"
+    description: "学习者偏好的信息接收方式（VARK模型适配中医）"
+    options: ["视觉型(图表/导图)", "听觉型(讲解/讨论)", "读写型(文档/笔记)", "实践型(案例/操作)"]
+    assessment_prompt: "判断学习者偏好的学习方式，适配中医多模态资源"
+
+  - id: interest_preference
+    name: "兴趣偏好"
+    description: "学习者对中医各专题的兴趣方向"
+    options: ["哲学基础", "藏象理论", "经络针灸", "方药应用", "诊断实践", "养生保健"]
+    assessment_prompt: "挖掘学习者最感兴趣的中医方向，用于资源推荐权重"
+
+  - id: cognitive_ability
+    name: "认知能力"
+    description: "抽象思维/记忆/逻辑推理能力评估"
+    levels: ["识记", "理解", "应用", "分析", "综合", "评价"]
+    assessment_prompt: "通过问答评估学习者的认知层次，影响资源深度"
+
+  - id: learning_goal
+    name: "学习目标"
+    description: "学习者的最终目标导向"
+    options: ["期末备考", "考研复习", "临床衔接", "兴趣拓展", "科研入门"]
+    assessment_prompt: "明确学习者的目标，用于路径规划和资源优先级"
+
+  - id: error_prone
+    name: "易错点识别"
+    description: "学习者在中医概念中常见的混淆和误区"
+    examples: ["肝主疏泄≠肝主藏血混淆", "阴虚与血虚混淆", "风寒与风热鉴别不清", "经络走向记忆错误"]
+    assessment_prompt: "识别学习者对中医概念的常见误解，生成针对性纠错资源"
+
+# ---- 多智能体角色定义 ----
+agents:
+  profile_builder:
+    role: "学习画像构建专家"
+    goal: "通过多轮对话，精准构建学习者的6维度画像，为个性化资源生成提供数据基础"
+    backstory: |
+      你是一位资深的教育心理学专家，同时精通中医教学方法。
+      你擅长通过自然对话，快速了解学习者的知识水平、学习风格、兴趣方向和易错点。
+      你的评估结果将直接影响后续所有Agent的资源生成质量。
+      在对话中，你会用中医相关的案例和问题来试探学习者的理解深度。
+    max_turns: 5  # 对话轮数上限
+
+  tcm_retriever:
+    role: "中医知识检索专家"
+    goal: "从中医知识库中精准检索与学习者画像匹配的知识点，确保所有生成内容有据可依"
+    backstory: |
+      你是一位中医文献学研究专家，熟悉《黄帝内经》《难经》等经典，
+      同时精通现代中医基础理论教材体系。
+      你擅长将抽象的中医概念映射到具体的教材章节和知识图谱节点，
+      并通过混合检索（向量+关键词+图谱）确保检索的全面性和准确性。
+      你的检索结果是防幻觉的第一道关卡。
+
+  resource_generator:
+    role: "个性化资源生成专家"
+    goal: "根据学习画像和检索到的知识，生成5种以上的个性化多模态学习资源"
+    backstory: |
+      你是一位创新教育设计专家，精通多模态教学资源开发。
+      你能根据学习者的画像特征（知识水平、学习风格、认知能力），
+      自动选择最合适的资源类型和呈现方式。
+      你生成的每一种资源都基于RAG检索结果，绝不凭空编造。
+      ⚠️ 严格要求：所有内容必须标注"仅供教育学习参考，非医疗建议"。
+
+  path_planner:
+    role: "个性化学习路径规划专家"
+    goal: "基于学习画像和课程大纲，规划循序渐进的个性化学习路径"
+    backstory: |
+      你是一位教学设计专家，熟悉布鲁姆认知分类法和中医课程体系。
+      你能根据学习者的当前水平和目标，动态规划最优学习路径，
+      合理安排知识点的前置依赖和学习顺序。
+      你会考虑学习者的时间约束和负荷承受能力，推荐每日学习量。
+
+  critique_agent:
+    role: "中医审校专家（防幻觉核心）"
+    goal: "对所有Agent生成的内容进行中医知识准确性审查，标注置信度，拒绝幻觉内容"
+    backstory: |
+      你是一位严谨的中医学审校专家，是本系统的防幻觉守门人。
+      你对每一个生成的知识点都会：1）与RAG检索原文比对；2）检查知识图谱一致性；
+      3）标注置信度（高/中/低）；4）对低置信度内容提出修正或拒绝。
+      你严格区分"教材表述"和"AI推断"，任何超出教材范围的推断都会被标注。
+      ⚠️ 你的审校是系统可信度的最终保障。
+
+  coordinator:
+    role: "多智能体协调调度专家"
+    goal: "统筹6个Agent的协作流程，确保画像→检索→生成→规划→审校的完整闭环"
+    backstory: |
+      你是整个多智能体系统的指挥官，负责协调各Agent的工作流程。
+      你确保每个环节的输出都能正确传递给下一个环节，
+      并在出现异常时进行流程调整和重试。
+      你还负责汇总最终输出，以统一的格式返回给用户。
+
+# ---- 资源类型定义（Factory模式）----
+resource_types:
+  - id: lecture_doc
+    name: "讲解文档"
+    description: "结构化的知识点讲解，适配学习者认知层次"
+    format: "markdown"
+    template_hint: "按{cognitive_level}深度讲解{knowledge_point}，包含定义、分类、临床意义"
+
+  - id: mind_map
+    name: "思维导图"
+    description: "知识结构的可视化呈现"
+    format: "json"  # 前端渲染用
+    template_hint: "以{knowledge_point}为中心，展开{depth}层关联概念"
+
+  - id: quiz_bank
+    name: "练习题库"
+    description: "多题型的自测练习（单选/多选/判断/简答）"
+    format: "json"
+    template_hint: "围绕{knowledge_point}生成{count}道{difficulty}级别的{question_type}题"
+
+  - id: extended_reading
+    name: "拓展阅读"
+    description: "相关经典原文、学术前沿或临床案例"
+    format: "markdown"
+    template_hint: "推荐{knowledge_point}相关的{reading_type}（经典原文/现代研究/临床案例）"
+
+  - id: animation_desc
+    name: "教学动画描述"
+    description: "用于前端动画呈现的脚本描述（如经络循行动画）"
+    format: "json"
+    template_hint: "描述{knowledge_point}的动画场景，包含关键帧、标注文字、时间轴"
+
+  - id: practice_case
+    name: "实操案例"
+    description: "辨证论治的临床思维案例（仅教学演示）"
+    format: "markdown"
+    template_hint: "基于{syndrome_type}设计教学案例，展示辨证思路，标注'仅供教学参考'"
+
+# ---- 防幻觉配置 ----
+anti_hallucination:
+  # 置信度阈值：低于此值的内容会被标注警告
+  confidence_threshold: 0.7
+  # 是否自动拒绝低置信度内容
+  auto_reject: false
+  # 事实核查来源优先级
+  verification_sources:
+    - "vector_search"       # 向量检索
+    - "keyword_search"      # 关键词检索
+    - "knowledge_graph"     # 知识图谱
+  # 免责声明模板
+  disclaimer: "⚠️ 本内容由AI生成，基于中医教材知识库检索，仅供教育学习参考，非医疗建议。如有健康问题请咨询专业中医师。"
+
+# ---- LLM 配置 ----
+llm:
+  provider: "spark"  # spark | dify
+  model: "generalv3.5"
+  temperature: 0.7
+  max_tokens: 4096
+  # 对话式画像构建用较低温度以获取更稳定的评估
+  profile_temperature: 0.3
+  # 资源生成用稍高温度以增加多样性
+  generation_temperature: 0.8
+
+  # ---- Dify 工作流配置（替代讯飞星火）----
+  # provider设为dify时使用，env中DIFY_API_KEY可覆盖此配置
+  dify:
+    enabled: false
+    api_url: "http://localhost/v1"          # Dify服务地址
+    api_key: ""                              # Dify API Key
+    workflow_id: ""                           # 工作流ID（可选）
+    timeout: 60                                # 请求超时（秒）
+    # 5个专家对应的Dify expert类型
+    expert_mapping:
+      profile_builder: "中医通识专家"
+      tcm_retriever: "中医通识专家"
+      resource_generator: "中药方剂专家"
+      critique_agent: "中医诊断专家"
+      path_planner: "养生保健专家"

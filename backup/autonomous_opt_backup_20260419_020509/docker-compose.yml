@@ -1,0 +1,48 @@
+# ============================================
+# TCM AI Learning Agent — Docker Compose
+# 服务：web（FastAPI + uvicorn workers）
+# 日志持久化挂载：logs/ → 宿主机留存
+# 环境变量注入：.env 文件
+# 重启策略：unless-stopped
+# ============================================
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: tcm-ai-web
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      - SPARK_APP_ID=${SPARK_APP_ID}
+      - SPARK_API_KEY=${SPARK_API_KEY}
+      - SPARK_API_SECRET=${SPARK_API_SECRET}
+      - SPARK_API_VERSION=${SPARK_API_VERSION:-generalv3.5}
+      - CHROMA_PERSIST_DIR=/app/data/vector_db
+      - APP_DEBUG=${APP_DEBUG:-false}
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8000
+      - PYTHONUNBUFFERED=1
+
+    volumes:
+      # 日志目录持久化（宿主机留存）
+      - ./logs:/app/logs
+      # 向量数据持久化
+      - ./data/vector_db:/app/data/vector_db
+      # 环境变量文件
+      - ./.env:/app/.env:ro
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/chat/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+    mem_limit: 2g
+    cpus: 2
