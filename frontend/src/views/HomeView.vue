@@ -1,114 +1,116 @@
 <template>
   <div class="home-container">
+    <div class="content-wrapper">
 
-    <!-- ===== 横幅 ===== -->
-    <section class="hero-banner">
-      <div class="banner-content">
-        <div class="banner-badge">
-          <i class="fa-solid fa-university banner-badge-icon"></i>
-          <span>安徽中医药大学 · 实训项目</span>
+      <!-- ===== 横幅 ===== -->
+      <section class="hero-banner">
+        <div class="banner-content">
+          <div class="banner-badge">
+            <i class="fa-solid fa-university banner-badge-icon"></i>
+            <span>安徽中医药大学 · 实训项目</span>
+          </div>
+          <h1 class="banner-title">
+            <span class="title-main">中医智能诊疗系统</span>
+            <span class="title-sub">TCM Mind-RAG</span>
+          </h1>
+          <p class="banner-desc">
+            融合CrewAI多智能体与中医知识图谱<br/>
+            九种体质辨识 · 辨证论治训练 · 用药安全审核
+          </p>
+          <div class="banner-actions">
+            <button class="btn btn-primary" @click="$router.push('/chat')">
+              <i class="fa-solid fa-stethoscope"></i> 开始学习
+            </button>
+            <button class="btn btn-secondary" @click="$router.push('/quiz')">
+              <i class="fa-solid fa-list-check"></i> 体质测评
+            </button>
+          </div>
         </div>
-        <h1 class="banner-title">
-          <span class="title-main">中医智能诊疗系统</span>
-          <span class="title-sub">TCM Mind-RAG</span>
-        </h1>
-        <p class="banner-desc">
-          融合CrewAI多智能体与中医知识图谱<br/>
-          九种体质辨识 · 辨证论治训练 · 用药安全审核
-        </p>
-        <div class="banner-actions">
-          <button class="btn btn-primary" @click="$router.push('/chat')">
-            <i class="fa-solid fa-stethoscope"></i> 开始学习
-          </button>
-          <button class="btn btn-secondary" @click="$router.push('/quiz')">
-            <i class="fa-solid fa-list-check"></i> 体质测评
-          </button>
-        </div>
-      </div>
-      <div class="banner-visual">
-        <div class="visual-frame">
-          <div class="frame-border"></div>
-          <div class="frame-border-inner"></div>
-          <div class="frame-content">
-            <div class="frame-icon">
-              <i class="fa-solid fa-yin-yang"></i>
+        <div class="banner-visual">
+          <div class="visual-frame">
+            <div class="frame-border"></div>
+            <div class="frame-border-inner"></div>
+            <div class="frame-content">
+              <div class="frame-icon">
+                <i class="fa-solid fa-yin-yang"></i>
+              </div>
+              <div class="frame-text">辨证论治</div>
             </div>
-            <div class="frame-text">辨证论治</div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== 功能入口 ===== -->
-    <section class="section features-section">
-      <div class="section-header">
-        <div class="section-tag">学习模块</div>
-        <h2 class="section-title">核心功能</h2>
-        <p class="section-desc">选择模块开始学习</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card" v-for="f in features" :key="f.title"
-             @click="$router.push(f.route)">
-          <div class="feature-icon-wrap">
-            <i :class="f.icon"></i>
-          </div>
-          <div class="feature-body">
-            <h3 class="feature-title">{{ f.title }}</h3>
-            <p class="feature-desc">{{ f.desc }}</p>
-          </div>
-          <div class="feature-arrow">
-            <i class="fa-solid fa-chevron-right"></i>
+      <!-- ===== 功能入口 ===== -->
+      <section class="section features-section">
+        <div class="section-header">
+          <div class="section-tag">学习模块</div>
+          <h2 class="section-title">核心功能</h2>
+          <p class="section-desc">选择模块开始学习</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card" v-for="f in features" :key="f.title"
+               @click="$router.push(f.route)">
+            <div class="feature-icon-wrap">
+              <i :class="f.icon"></i>
+            </div>
+            <div class="feature-body">
+              <h3 class="feature-title">{{ f.title }}</h3>
+              <p class="feature-desc">{{ f.desc }}</p>
+            </div>
+            <div class="feature-arrow">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== 学习流程 ===== -->
-    <section class="section flow-section">
-      <div class="section-header">
-        <div class="section-tag">学习路径</div>
-        <h2 class="section-title">辨证论治学习步骤</h2>
-        <p class="section-desc">四步掌握辨证论治核心方法</p>
-      </div>
-      <div class="flow-steps">
-        <div class="flow-step" v-for="(step, i) in flowSteps" :key="i">
-          <div class="step-num">{{ String(i + 1).padStart(2, '0') }}</div>
-          <div class="step-icon">
-            <i :class="step.icon"></i>
+      <!-- ===== 学习流程 ===== -->
+      <section class="section flow-section">
+        <div class="section-header">
+          <div class="section-tag">学习路径</div>
+          <h2 class="section-title">辨证论治学习步骤</h2>
+          <p class="section-desc">四步掌握辨证论治核心方法</p>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step" v-for="(step, i) in flowSteps" :key="i">
+            <div class="step-num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="step-icon">
+              <i :class="step.icon"></i>
+            </div>
+            <h4 class="step-title">{{ step.title }}</h4>
+            <p class="step-desc">{{ step.desc }}</p>
           </div>
-          <h4 class="step-title">{{ step.title }}</h4>
-          <p class="step-desc">{{ step.desc }}</p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== 体质分类 ===== -->
-    <section class="section constitution-section">
-      <div class="section-header">
-        <div class="section-tag">体质辨识</div>
-        <h2 class="section-title">九种体质分类</h2>
-        <p class="section-desc">依据《中医体质分类与判定》国家标准</p>
-      </div>
-      <div class="constitution-grid">
-        <div class="constitution-card" v-for="c in constitutions" :key="c.name"
-             @click="$router.push('/quiz')">
-          <div class="const-name">{{ c.name }}</div>
-          <div class="const-trait">{{ c.trait }}</div>
+      <!-- ===== 体质分类 ===== -->
+      <section class="section constitution-section">
+        <div class="section-header">
+          <div class="section-tag">体质辨识</div>
+          <h2 class="section-title">九种体质分类</h2>
+          <p class="section-desc">依据《中医体质分类与判定》国家标准</p>
         </div>
-      </div>
-    </section>
+        <div class="constitution-grid">
+          <div class="constitution-card" v-for="c in constitutions" :key="c.name"
+               @click="$router.push('/quiz')">
+            <div class="const-name">{{ c.name }}</div>
+            <div class="const-trait">{{ c.trait }}</div>
+          </div>
+        </div>
+      </section>
 
-    <!-- ===== 底部CTA ===== -->
-    <section class="cta-section">
-      <div class="cta-box">
-        <h2 class="cta-title">开始学习</h2>
-        <p class="cta-desc">中医辨证论治实训系统</p>
-        <button class="btn btn-primary" @click="$router.push('/chat')">
-          进入学习 <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-    </section>
+      <!-- ===== 底部CTA ===== -->
+      <section class="cta-section">
+        <div class="cta-box">
+          <h2 class="cta-title">开始学习</h2>
+          <p class="cta-desc">中医辨证论治实训系统</p>
+          <button class="btn btn-primary" @click="$router.push('/chat')">
+            进入学习 <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
 
+    </div>
   </div>
 </template>
 
@@ -169,9 +171,28 @@ const constitutions = [
 <style scoped>
 /* ===== 容器 ===== */
 .home-container {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('/background1.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+/* ===== 背景图片（不再需要单独的层） ===== */
+.background-overlay {
+  display: none;
+}
+
+/* ===== 内容包装 ===== */
+.content-wrapper {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  background: transparent;
+  min-height: 100vh;
 }
 
 /* ===== 横幅 ===== */
@@ -327,7 +348,7 @@ const constitutions = [
 
 /* ===== 功能卡片 ===== */
 .features-section {
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.65);
   margin: 0 -20px;
   padding: 52px 40px;
   border-top: 1px solid var(--border);
@@ -402,7 +423,7 @@ const constitutions = [
 
 /* ===== 流程 ===== */
 .flow-section {
-  background: var(--bg-section);
+  background: rgba(240, 237, 230, 0.6);
   margin: 0 -20px;
   padding: 52px 40px;
 }
@@ -541,6 +562,10 @@ const constitutions = [
   .flow-section {
     margin: 0 -20px;
     padding: 40px 20px;
+  }
+  
+  .content-wrapper {
+    padding: 0 20px;
   }
 }
 

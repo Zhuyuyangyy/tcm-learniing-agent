@@ -54,6 +54,10 @@ html, body {
   min-height: 100vh;
 }
 
+html.page-home, body.page-home {
+  background: transparent;
+}
+
 #app {
   min-height: 100vh;
   display: flex;
