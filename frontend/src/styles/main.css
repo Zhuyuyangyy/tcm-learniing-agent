@@ -54,7 +54,7 @@ html, body {
   min-height: 100vh;
 }
 
-html.page-home, body.page-home, html.page-quiz, body.page-quiz, html.page-chat, body.page-chat, html.page-kb, body.page-kb {
+html.page-home, body.page-home, html.page-quiz, body.page-quiz, html.page-chat, body.page-chat, html.page-kb, body.page-kb, html.page-therapy, body.page-therapy {
   background: transparent;
 }
 
