@@ -392,9 +392,9 @@ function submitDiagnosis() {
 <style scoped>
 .bzlz-page {
   position: relative;
-  max-width: 1180px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 26px 26px 44px;
+  padding: 20px 18px 34px;
   min-height: calc(100vh - 60px);
 }
 
@@ -514,13 +514,13 @@ function submitDiagnosis() {
 
 .title-area {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .title {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: 56px;
+  font-size: 58px;
   line-height: 1.06;
   letter-spacing: 4px;
   color: #2f5c4f;
@@ -528,7 +528,7 @@ function submitDiagnosis() {
 }
 
 .title-subline {
-  margin-top: 14px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -568,15 +568,15 @@ function submitDiagnosis() {
 
 .main-layout {
   display: grid;
-  grid-template-columns: 276px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 292px minmax(0, 1fr);
+  gap: 10px;
   align-items: start;
 }
 
 .left-panel {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .side-card,
@@ -592,7 +592,7 @@ function submitDiagnosis() {
 
 .side-card {
   border-radius: 10px;
-  padding: 12px 14px 12px;
+  padding: 14px 14px 14px;
 }
 
 .department-card {
@@ -603,7 +603,7 @@ function submitDiagnosis() {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #2f5d50;
   font-family: var(--font-serif);
   font-size: 17px;
@@ -617,12 +617,12 @@ function submitDiagnosis() {
 .chip-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
 .chip {
-  height: 24px;
-  padding: 0 12px;
+  height: 26px;
+  padding: 0 13px;
   border-radius: 8px;
   border: 1px solid rgba(231, 224, 214, 0.95);
   background: #f2eee8;
@@ -674,8 +674,8 @@ function submitDiagnosis() {
 }
 
 .clear-button {
-  width: 64px;
-  height: 32px;
+  width: 66px;
+  height: 34px;
   border-radius: 6px;
   border: 1px solid #7a9c89;
   background: rgba(255, 255, 255, 0.7);
@@ -687,13 +687,13 @@ function submitDiagnosis() {
 .content-panel {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .study-card {
   position: relative;
   border-radius: 14px;
-  padding: 24px 20px 20px;
+  padding: 18px 18px 16px;
   overflow: hidden;
 }
 
@@ -728,10 +728,10 @@ function submitDiagnosis() {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 274px minmax(0, 1fr);
+  grid-template-columns: 300px minmax(0, 1fr);
   align-items: center;
-  gap: 18px;
-  min-height: 344px;
+  gap: 12px;
+  min-height: 372px;
 }
 
 .taiji-box {
@@ -741,7 +741,7 @@ function submitDiagnosis() {
 }
 
 .taiji-image {
-  width: 276px;
+  width: 292px;
   max-width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 12px 18px rgba(117, 113, 93, 0.14));
@@ -765,7 +765,7 @@ function submitDiagnosis() {
 .input-panel h2 {
   margin: 8px 0 8px;
   font-family: var(--font-serif);
-  font-size: 28px;
+  font-size: 30px;
   letter-spacing: 2px;
   color: #2f5d50;
 }
@@ -775,7 +775,7 @@ function submitDiagnosis() {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: #878177;
   font-size: 14px;
 }
@@ -788,14 +788,14 @@ function submitDiagnosis() {
 
 .textarea-wrap {
   position: relative;
-  max-width: 428px;
+  max-width: 490px;
   margin: 0 auto;
 }
 
 .symptom-textarea {
   width: 100%;
-  min-height: 104px;
-  padding: 16px 16px 28px;
+  min-height: 110px;
+  padding: 16px 18px 30px;
   border-radius: 10px;
   border: 1px solid rgba(221, 210, 196, 0.94);
   background: rgba(255, 255, 255, 0.86);
@@ -820,10 +820,10 @@ function submitDiagnosis() {
 }
 
 .start-button {
-  margin-top: 14px;
+  margin-top: 12px;
   width: 100%;
-  max-width: 428px;
-  height: 36px;
+  max-width: 490px;
+  height: 38px;
   border: none;
   border-radius: 4px;
   background: linear-gradient(180deg, #2f6b5a, #2a5e4f);
@@ -841,7 +841,7 @@ function submitDiagnosis() {
 }
 
 .demo-area {
-  margin-top: 16px;
+  margin-top: 14px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -883,13 +883,13 @@ function submitDiagnosis() {
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .feature-card {
-  min-height: 74px;
+  min-height: 78px;
   border-radius: 10px;
-  padding: 16px 18px;
+  padding: 16px 18px 15px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -932,7 +932,7 @@ function submitDiagnosis() {
 
 .result-card-wrap {
   border-radius: 14px;
-  padding: 20px;
+  padding: 18px;
 }
 
 .result-header {
