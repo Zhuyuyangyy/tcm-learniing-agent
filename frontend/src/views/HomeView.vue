@@ -173,16 +173,6 @@ const constitutions = [
 .home-container {
   position: relative;
   min-height: 100vh;
-  background-image: url('/background1.png');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-}
-
-/* ===== 背景图片（不再需要单独的层） ===== */
-.background-overlay {
-  display: none;
 }
 
 /* ===== 内容包装 ===== */

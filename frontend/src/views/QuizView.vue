@@ -1,9 +1,6 @@
-﻿<template>
+<template>
   <div class="page-container">
-    <div class="page-header">
-      <h1 class="page-title">九种体质测评</h1>
-      <p class="page-desc">依据《中医体质分类与判定》国家标准</p>
-    </div>
+
 
     <!-- 测评流程 -->
     <div class="quiz-container">
@@ -11,8 +8,7 @@
       <div v-if="phase === 'intro'" class="quiz-intro">
         <div class="intro-visual">
           <div class="constitution-display">
-            <div class="display-emoji">☯</div>
-            <div class="display-label">九种体质</div>
+            <img class="display-image" src="/tizhiceping-taiji.png" alt="九种体质">
           </div>
         </div>
         <div class="intro-info card">
@@ -380,9 +376,11 @@ onMounted(() => {
 
 <style scoped>
 .page-container {
+  position: relative;
   max-width: 900px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 100px 20px 40px;
+  min-height: calc(100vh - 80px);
 }
 
 .page-header {
@@ -407,8 +405,8 @@ onMounted(() => {
 /* Intro */
 .quiz-intro {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1fr 450px;
+  gap: 60px;
   align-items: center;
 }
 
@@ -417,15 +415,23 @@ onMounted(() => {
   padding: 40px;
 }
 
-.display-emoji {
-  font-size: 80px;
+.display-image {
+  width: 500px;
+  height: auto;
   margin-bottom: 16px;
+  margin-left: -80px;
 }
 
 .display-label {
   font-size: 18px;
   font-family: var(--font-serif);
   color: var(--primary-brown);
+}
+
+.intro-info {
+  padding: 32px;
+  width: 100%;
+  max-width: 450px;
 }
 
 .intro-info h2 {
@@ -447,15 +453,16 @@ onMounted(() => {
   margin-bottom: 16px;
   cursor: pointer;
   transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.75);
 }
 
 .mode-card:hover {
-  background: var(--bg-soft);
+  background: rgba(248, 245, 242, 0.9);
   border-color: var(--primary-brown);
 }
 
 .quick-mode {
-  background: var(--bg-soft);
+  background: rgba(240, 237, 230, 0.85);
   border-color: var(--border-medium);
 }
 
@@ -507,10 +514,14 @@ onMounted(() => {
 .intro-list {
   list-style: none;
   padding: 16px;
-  background: var(--bg-soft);
+  background: rgba(240, 237, 230, 0.75);
   border-radius: var(--radius-md);
   border-left: 3px solid var(--primary-brown);
   margin-top: 20px;
+}
+
+.intro-info.card {
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .intro-list li {
@@ -554,6 +565,7 @@ onMounted(() => {
   max-width: 600px;
   margin: 0 auto 24px;
   padding: 28px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .question-num {
@@ -645,6 +657,7 @@ onMounted(() => {
   gap: 20px;
   padding: 20px;
   margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .banner-icon {
@@ -666,6 +679,7 @@ onMounted(() => {
 .result-chart {
   margin-bottom: 24px;
   padding: 20px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .result-section-title {
@@ -684,6 +698,7 @@ onMounted(() => {
   margin-bottom: 24px;
   padding: 24px;
   text-align: center;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .primary-badge {
@@ -725,6 +740,28 @@ onMounted(() => {
 .result-detail {
   margin-bottom: 24px;
   padding: 20px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.detail-item {
+  display: grid;
+  grid-template-columns: 100px 1fr 60px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(248, 245, 242, 0.75);
+  border-radius: var(--radius-md);
+}
+
+.detail-item.highlight {
+  background: rgba(240, 237, 230, 0.85);
+}
+
+.advice-card {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .detail-grid {
